@@ -1,1 +1,1 @@
-# loki-log-export-to-s3
+# loki-log-exporter-to-s3
