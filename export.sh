@@ -41,7 +41,7 @@ for i in {2..72}; do
   echo "end_time: $end_time"
 
   # Prepare part file name
-  prefix_file_name="loki_v${LOGCLI_VERSION//./-}"
+  prefix_file_name="loki_v${LOGCLI_VERSION//./-}__"
   part_file="$prefix_file_name$(date -u -d "$start_time" '+%Y%m%dT%H%M%S')_$(date -u -d "$end_time" '+%Y%m%dT%H%M%S').part"
   echo "part_file: $part_file"
 
