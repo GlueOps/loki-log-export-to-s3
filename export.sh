@@ -21,8 +21,6 @@ loki_version_info() {
   echo "LOKI_SERVER_VERSION: $LOKI_SERVER_VERSION"
 }
 
-SEMVER_REGEX="^([0-9]+)\.([0-9]+)\.([0-9]+)(-([0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*))?(\+([0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*))?$"
-
 if [ "$LOGCLI_VERSION" != "$LOKI_SERVER_VERSION" ]; then
   echo "ERROR: The LOGCLI and Loki API versions do not match. Exiting the script."
   loki_version_info
