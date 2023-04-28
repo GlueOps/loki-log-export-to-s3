@@ -41,7 +41,8 @@ for i in {2..72}; do
   echo "end_time: $end_time"
 
   # Prepare part file name
-  part_file="loki_$(date -u -d "$start_time" '+%Y%m%dT%H%M%S')_$(date -u -d "$end_time" '+%Y%m%dT%H%M%S').part"
+  prefix_file_name="loki_v${LOGCLI_VERSION//./-}"
+  part_file="$prefix_file_name$(date -u -d "$start_time" '+%Y%m%dT%H%M%S')_$(date -u -d "$end_time" '+%Y%m%dT%H%M%S').part"
   echo "part_file: $part_file"
 
   # Prepare S3 path
@@ -56,7 +57,7 @@ for i in {2..72}; do
   fi
 
   # Query Loki and create part file. The part file will be created in the current directory.
-  logcli query '{job=~".+"}' --output jsonl --timezone=UTC --tls-skip-verify --from "$start_time" --to "$end_time" --parallel-max-workers=2 --parallel-duration=120m --part-path-prefix=$(pwd)/loki_"v${LOGCLI_VERSION//./-}"
+  logcli query '{job=~".+"}' --output jsonl --timezone=UTC --tls-skip-verify --from "$start_time" --to "$end_time" --parallel-max-workers=2 --parallel-duration=120m --part-path-prefix=$(pwd)/$prefix_file_name
 
   # Check for multiple part files. This should never since each parallel-duration is 2 hours which exceeds the requested time range of 1 hour.
   part_files_count=$(ls -1 *.part 2>/dev/null | wc -l)
