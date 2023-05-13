@@ -1,4 +1,4 @@
-FROM amazon/aws-cli:2.11.15
+FROM amazon/aws-cli:2.11.20
 
 RUN yum install -y \
     jq \
@@ -6,7 +6,7 @@ RUN yum install -y \
     gzip \
     && yum clean all \
     && rm -rf /var/cache/yum \
-    && curl -L -o logcli-linux-amd64.zip https://github.com/grafana/loki/releases/download/v2.8.0/logcli-linux-amd64.zip \
+    && curl -L -o logcli-linux-amd64.zip https://github.com/grafana/loki/releases/download/v2.8.2/logcli-linux-amd64.zip \
     && unzip logcli-linux-amd64.zip \
     && mv logcli-linux-amd64 /usr/local/bin/logcli \
     && rm logcli-linux-amd64.zip
